@@ -33,7 +33,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에 연결된 db의 넘버링 전력을 따라간다. ex) 오라클-시퀀스, mysql-auto_increment
 	private int id; //시퀀스, auto_increment
 	
-	@Column(nullable=false, length=30)
+	@Column(nullable=false, length=30, unique=true)
 	private String username; //아이디
 	
 	@Column(nullable=false, length=100) // 해쉬로 비밀번호를 데이터베이스에 넣을거기 때문에 넉넉하게 100자로 설정함
