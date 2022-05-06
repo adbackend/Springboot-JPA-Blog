@@ -29,28 +29,27 @@ import lombok.NoArgsConstructor;
 @Builder //빌더패턴
 @Entity
 public class Board {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //
 	private int id;
-	
+
 	@Column(nullable = false, length = 100)
 	private String title;
-	
+
 	@Lob //대용량 데이터
 	private String content; // 썸머노트 라이브러리 <html>태그가 섞여서 디자인 됨
-	
-	@ColumnDefault("0") // int값 이기때문에 ' '가 없어도 된다
+
 	private int count; //조회수
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)// (board=many, user=one) 여러개의 Board게시글은 한명의user에 의해 쓰인다
 	@JoinColumn(name="userId")
 	private User user;
-	
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //하나의 게시글은,여러개의 답변을 가지고 있다.  
+
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //하나의 게시글은,여러개의 답변을 가지고 있다.
 	//mappedBy-연관관계 주인이아니다.(나는 fk가 아니에요) db에 컬럼을 만들지 마세요
 	private List<Reply> reply;
-	
+
 	@CreationTimestamp
 	private Timestamp createDate;
 }
