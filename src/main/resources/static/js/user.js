@@ -1,8 +1,12 @@
 let index = {
 	init: function(){
 		
-		$("#btn-save").on("click",()=>{ // function(){}, ()=> this를 바인딩하기 위해서!!
+		$("#btn-save").on("click", ()=>{ // function(){}, ()=> this를 바인딩하기 위해서!!
 			this.save();
+		});
+		
+		$("#btn-update").on("click", ()=>{
+			this.update();
 		});
 		
 	},
@@ -37,6 +41,36 @@ let index = {
 		}); 
 	},
 	
+	update : function(){
+		let data = {
+			id : $("#id").val(),
+			username : $("#username").val(),
+			password : $("#password").val(),
+			email : $("#email").val()
+		}
+		
+		$.ajax({
+			type :"put",
+			url : "/user",
+			data : JSON.stringify(data),
+			contentType : "application/json; charset=utf-8", // body가 어떤 타입인지
+			dataType : "json"
+		}).done(function(resp){
+			
+			alert("회원수정이 완료되었습니다");
+			location.href="/";
+			
+		}).fail(function(error){
+			alert("회원수정 실패.."+JSON.stringify(error));
+		});
+	}
+	
 }
 
 index.init();
+
+
+
+
+
+
