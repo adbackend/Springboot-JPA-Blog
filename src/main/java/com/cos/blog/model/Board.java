@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,8 +48,9 @@ public class Board {
 	private User user;
 
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //하나의 게시글은,여러개의 답변을 가지고 있다.
+	@JsonIgnoreProperties({"board", "user"})
 	//mappedBy-연관관계 주인이아니다.(나는 fk가 아니에요) db에 컬럼을 만들지 마세요
-	private List<Reply> reply;
+	private List<Reply> replys;
 
 	@CreationTimestamp
 	private Timestamp createDate;
