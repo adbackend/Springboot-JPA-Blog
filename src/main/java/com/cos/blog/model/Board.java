@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -49,6 +50,7 @@ public class Board {
 
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //하나의 게시글은,여러개의 답변을 가지고 있다.
 	@JsonIgnoreProperties({"board", "user"})
+	@OrderBy("id desc")
 	//mappedBy-연관관계 주인이아니다.(나는 fk가 아니에요) db에 컬럼을 만들지 마세요
 	private List<Reply> replys;
 
